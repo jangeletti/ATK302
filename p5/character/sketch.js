@@ -1,3 +1,6 @@
+let t = 'This is Puffystick, the new Pokemon. He is a steel and electric type. You can find them in the wild at level 20 already.'
+let v = 'When Puffystick reaches level 40, it evolves into Carbo Dioxy which is a poision and flying type.'
+
 function setup() {
   // put setup code here
   createCanvas(windowWidth, windowHeight);
@@ -8,7 +11,9 @@ function draw() {
 background('white');
 
 if (mouseIsPressed) {
-  background('red');
+  background('#78f4ff');
+  fill('black');
+  text(v, 10, 10, 400, 200);
   fill('#b1b5b0');
   ellipse(550, 250, 150, 100);
   ellipse(250, 350, 60, 45);
@@ -20,7 +25,7 @@ if (mouseIsPressed) {
   fill('#55d42f');
   arc(335, 275, 15, 15, TWO_PI, PI, CHORD);
   arc(400, 275, 15, 15, TWO_PI, PI, CHORD);
-  text('')
+
 
 
 } else {
@@ -29,6 +34,8 @@ if (mouseIsPressed) {
   rect(0, 400, windowWidth, 300);
   fill('#78f4ff');
   rect(0, 0, windowWidth, 400);
+  fill('black');
+  text(t, 10, 10, 400, 200);
   stroke(1);
   translate(175, 20);
   fill('#a9a9a9');
@@ -46,8 +53,7 @@ if (mouseIsPressed) {
   fill('#000000');
   ellipse(260, 195, 7, 7);
   ellipse(234, 203, 7, 7);
-  let t = 'This is Puffystick, the new Pokemon. He is a steel and electric type. You can find them in the wild at level 20 already
-  text('This is Puffystick, the new Pokemon. He is a steel and electric type)
+
 }
 
 
