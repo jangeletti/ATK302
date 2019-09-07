@@ -8,15 +8,29 @@ function draw() {
 background('white');
 
 if (mouseIsPressed) {
+  background('red');
   fill('#b1b5b0');
-  ellipse(400, 300, 400, 200);
-  ellipse(500, 200, 100, 60);
-  ellipse(700, 300, 50, 30);
-  ellipse(200, 150, 60, 45);
-  ellipse(350, 450, 25, 10);
+  ellipse(550, 250, 150, 100);
+  ellipse(250, 350, 60, 45);
+  ellipse(498, 377, 50, 25);
+  ellipse(390, 300, 300, 200);
+  fill('#f2e380');
+  arc(325, 275, 75, 75, TWO_PI, PI, CHORD);
+  arc(390, 275, 75, 75, TWO_PI, PI, CHORD);
+  fill('#55d42f');
+  arc(335, 275, 15, 15, TWO_PI, PI, CHORD);
+  arc(400, 275, 15, 15, TWO_PI, PI, CHORD);
+  text('')
+
 
 } else {
-
+  noStroke();
+  fill('green');
+  rect(0, 400, windowWidth, 300);
+  fill('#78f4ff');
+  rect(0, 0, windowWidth, 400);
+  stroke(1);
+  translate(175, 20);
   fill('#a9a9a9');
   quad(200, 200, 210, 210, 210, 510, 200, 500);
   quad(210, 210, 280, 190, 280, 490, 210, 510);
@@ -32,7 +46,8 @@ if (mouseIsPressed) {
   fill('#000000');
   ellipse(260, 195, 7, 7);
   ellipse(234, 203, 7, 7);
-
+  let t = 'This is Puffystick, the new Pokemon. He is a steel and electric type. You can find them in the wild at level 20 already
+  text('This is Puffystick, the new Pokemon. He is a steel and electric type)
 }
 
 
