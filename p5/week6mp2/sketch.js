@@ -1,9 +1,17 @@
 var myState = 0;
 var myState1 = 0
-var timer = 0;
 var pictureTimer = 0;
 var image1, image2, image3, image4;
 var typeface;
+var audio;
+var video;
+var x = -50;
+var y = -50;
+var timer = 0;
+var w = 50;
+var h = 10;
+
+
 
 function preload() {
   image1 = loadImage('assets/image1.png');
@@ -11,6 +19,7 @@ function preload() {
   image3 = loadImage('assets/image3.png');
   image4 = loadImage('assets/image4.jpg');
   typeface = loadFont('assets/ProximaNovaBold.ttf');
+  audio = document.getElementById('myAudio');
 }
 
 function setup() {
@@ -19,6 +28,7 @@ function setup() {
   rectMode(CENTER);
   imageMode(CENTER);
   textFont(typeface, 32);
+  video = createVideo('assets/JazzPoster.mov');
 }
 
 function draw() {
@@ -26,12 +36,18 @@ function draw() {
     case 0:
       background('white');
       rect(width / 2, height / 2, 200, 50);
-      text('START', width / 2, height / 2 + 10);
+      textSize(32);
+      text('ENTER', width / 2, height / 2 + 10);
+      textSize(12);
+      text('you cannot exit', width / 2, height / 2 + 40);
       break;
 
     case 1:
       background(0);
+      fill('white');
       rect(width / 2, height - 50, 200, 50);
+      fill('black');
+      textSize(32);
       text('NEXT STATE', width / 2, height - 40);
       switch (myState1) {
         case 0:
@@ -49,8 +65,8 @@ function draw() {
           doPictureTimer();
           break;
 
-          case 3:
-          image(image4, width/2, height/2, 432, 432);
+        case 3:
+          image(image4, width / 2, height / 2, 432, 432);
           doPictureTimer();
           break;
       }
@@ -58,20 +74,51 @@ function draw() {
       break;
 
     case 2:
-      background('yellow');
-      visualizer();
+      background('gray');
+      image(video, width / 2, height / 2);
+      timer++;
+      if (timer >= 200) {
+        myState = 3;
+        timer = 0;
+      }
       break;
 
     case 3:
-      background('green');
+      background('white');
       timer++;
-      if (timer >= 200) {
-        myState = 2;
+      if (timer >= 400) {
+        myState = 4;
         timer = 0;
         break;
       }
       case 4:
-        background('orange');
+        rectMode(CORNER);
+        noStroke();
+        fill('black');
+        rect(x, y, 50, 50)
+        x = x + 20;
+        y = y + 0.5;
+        if (x > windowWidth) {
+          x = -50;
+        }
+        fill('white');
+        ellipseMode(CENTER);
+        ellipse(width / 2 - 100, 200, w, w);
+        ellipse(width / 2 + 100, 200, w, w);
+        arc(width / 2, 350, w, h, TWO_PI, PI);
+        if (w > 700) {
+          w = w + 5;
+          h = h + 5;
+        }
+        if (y > windowHeight) {
+          w++;
+          h++;
+        }
+        timer++;
+        if (timer >= 2150) {
+          myState = 1;
+          timer = 0;
+        }
         break;
 
   }
@@ -85,6 +132,11 @@ function mouseReleased() {
   if (myState == 1 && mouseX >= 540 && mouseX <= 740 && mouseY >= 545 && mouseY <= 595) {
     myState = 2;
   }
+  if (myState == 2) {
+    video.play();
+  } else {
+    video.hide();
+  }
   console.log(mouseX + ',' + mouseY);
 }
 
@@ -95,36 +147,36 @@ function doPictureTimer() {
       myState1++;
       pictureTimer = 0;
     }
-  if (myState1 >= 4){
-    myState1 = 0;
-  }
+    if (myState1 >= 4) {
+      myState1 = 0;
+    }
   }
 }
 
-  function visualizer() {
-    //https://www.patrick-wied.at/blog/how-to-create-audio-visualizations-with-javascript-html
-    var ctx = new AudioContext();
-    var audio = document.getElementById('myAudio');
-    var audioSrc = ctx.createMediaElementSource(audio);
-    var analyser = ctx.createAnalyser();
-    audioSrc.connect(analyser);
-    audioSrc.connect(ctx.destination);
-    var frequencyData = new Unit8Array(analyser.frequencyBinCount);
+function visualizer() {
+  //https://www.patrick-wied.at/blog/how-to-create-audio-visualizations-with-javascript-html
+  var ctx = new AudioContext();
+  var audio = document.getElementById('myAudio');
+  var audioSrc = ctx.createMediaElementSource(audio);
+  var analyser = ctx.createAnalyser();
+  audioSrc.connect(analyser);
+  audioSrc.connect(ctx.destination);
+  var frequencyData = new Unit8Array(analyser.frequencyBinCount);
 
-    function renderFrame() {
-      requestAnimationFrame(renderFrame);
-      analyser.getByteFrequencyData(frequencyData);
-    }
-    audio.play();
-    renderFrame();
-
-    var twoPi = 2 * Math.PI;
-    var objectsCount = 12;
-    var radius = 100;
-    var change = twoPi / objectsCount;
-    for (var i = 0; i > twoPi; i += change) {
-      var x = radius * cos(i);
-      var y = radius * sin(i);
-      var rotation = i;
-    }
+  function renderFrame() {
+    requestAnimationFrame(renderFrame);
+    analyser.getByteFrequencyData(frequencyData);
   }
+  audio.play();
+  renderFrame();
+
+  var twoPi = 2 * Math.PI;
+  var objectsCount = 12;
+  var radius = 100;
+  var change = twoPi / objectsCount;
+  for (var i = 0; i > twoPi; i += change) {
+    var x = radius * cos(i);
+    var y = radius * sin(i);
+    var rotation = i;
+  }
+}
