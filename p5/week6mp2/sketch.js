@@ -4,7 +4,6 @@ var pictureTimer = 0;
 var image1, image2, image3, image4;
 var typeface;
 var audio;
-var video;
 var x = -50;
 var y = -50;
 var timer = 0;
@@ -28,7 +27,6 @@ function setup() {
   rectMode(CENTER);
   imageMode(CENTER);
   textFont(typeface, 32);
-  video = createVideo('assets/JazzPoster.mov');
 }
 
 function draw() {
@@ -75,7 +73,6 @@ function draw() {
 
     case 2:
       background('gray');
-      image(video, width / 2, height / 2);
       timer++;
       if (timer >= 200) {
         myState = 3;
@@ -131,11 +128,6 @@ function mouseReleased() {
   }
   if (myState == 1 && mouseX >= 540 && mouseX <= 740 && mouseY >= 545 && mouseY <= 595) {
     myState = 2;
-  }
-  if (myState == 2) {
-    video.play();
-  } else {
-    video.hide();
   }
   console.log(mouseX + ',' + mouseY);
 }
