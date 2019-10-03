@@ -145,30 +145,4 @@ function doPictureTimer() {
   }
 }
 
-function visualizer() {
   //https://www.patrick-wied.at/blog/how-to-create-audio-visualizations-with-javascript-html
-  var ctx = new AudioContext();
-  var audio = document.getElementById('myAudio');
-  var audioSrc = ctx.createMediaElementSource(audio);
-  var analyser = ctx.createAnalyser();
-  audioSrc.connect(analyser);
-  audioSrc.connect(ctx.destination);
-  var frequencyData = new Unit8Array(analyser.frequencyBinCount);
-
-  function renderFrame() {
-    requestAnimationFrame(renderFrame);
-    analyser.getByteFrequencyData(frequencyData);
-  }
-  audio.play();
-  renderFrame();
-
-  var twoPi = 2 * Math.PI;
-  var objectsCount = 12;
-  var radius = 100;
-  var change = twoPi / objectsCount;
-  for (var i = 0; i > twoPi; i += change) {
-    var x = radius * cos(i);
-    var y = radius * sin(i);
-    var rotation = i;
-  }
-}
