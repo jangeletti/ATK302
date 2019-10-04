@@ -7,8 +7,7 @@ var audio;
 var x = -50;
 var y = -50;
 var timer = 0;
-var w = 50;
-var h = 10;
+var myTextSize = 64;
 
 
 
@@ -24,7 +23,6 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER);
-  rectMode(CENTER);
   imageMode(CENTER);
   textFont(typeface, 32);
 }
@@ -33,6 +31,7 @@ function draw() {
   switch (myState) {
     case 0:
       background('white');
+      rectMode(CENTER);
       rect(width / 2, height / 2, 200, 50);
       textSize(32);
       text('ENTER', width / 2, height / 2 + 10);
@@ -42,6 +41,7 @@ function draw() {
 
     case 1:
       background(0);
+      rectMode(CENTER);
       fill('white');
       rect(width / 2, height - 50, 200, 50);
       fill('black');
@@ -68,27 +68,18 @@ function draw() {
           doPictureTimer();
           break;
       }
-
       break;
 
-    case 2:
-      background('gray');
-      timer++;
-      if (timer >= 200) {
-        myState = 3;
-        timer = 0;
-      }
-      break;
-
-    case 3:
+      case 2:
       background('white');
       timer++;
-      if (timer >= 400) {
-        myState = 4;
+      if (timer >= 1) {
         timer = 0;
-        break;
+        myState = 3;
       }
-      case 4:
+      break;
+
+      case 3:
         rectMode(CORNER);
         noStroke();
         fill('black');
@@ -99,23 +90,22 @@ function draw() {
           x = -50;
         }
         fill('white');
-        ellipseMode(CENTER);
-        ellipse(width / 2 - 100, 200, w, w);
-        ellipse(width / 2 + 100, 200, w, w);
-        arc(width / 2, 350, w, h, TWO_PI, PI);
-        if (w > 700) {
-          w = w + 5;
-          h = h + 5;
-        }
-        if (y > windowHeight) {
-          w++;
-          h++;
-        }
+        textAlign(CENTER);
+        textSize(12);
+        text('please wait', width/2, 50);
+        textSize(myTextSize);
+        text("THANK YOU", width/2, height/2);
         timer++;
-        if (timer >= 2150) {
+        if (timer >= 1500) {
           myState = 1;
           timer = 0;
+          x = -50;
+          y = -50;
         }
+        textSize(24);
+        text('Contact Info', width / 2, height /2 + 200);
+        text('jrange1@ilstu.edu', width/2, height/2+250);
+        text('630.525.1392.', width/2, height/2+275);
         break;
 
   }
@@ -144,5 +134,3 @@ function doPictureTimer() {
     }
   }
 }
-
-  //https://www.patrick-wied.at/blog/how-to-create-audio-visualizations-with-javascript-html
