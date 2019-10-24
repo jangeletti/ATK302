@@ -90,6 +90,9 @@ function draw() {
     fill('black');
     textSize(64);
     text("you lose!", width/2, height/2);
+    textSize(24);
+    fill('white');
+    text("try again", width/2, height/2+200);
       break;
 
       case 4:
@@ -97,6 +100,9 @@ function draw() {
       fill('black');
       textSize(64);
       text("you win!", width/2, height/2);
+      textSize(24);
+      fill('white');
+      text("play again", width/2, height/2+200);
       break;
   }
 
@@ -116,6 +122,18 @@ function mouseReleased() {
 
   if(myState == 1 && mouseX >= 770 && mouseX <= 930 && mouseY >= 225 && mouseY <= 385) {
     myState =3;
+  }
+
+  if (myState == 3 && mouseX >= 550 && mouseX <= 740 && mouseY >= 490 && mouseY <= 510) {
+    resetTheGame();
+    myState = 0;
+    timer = 0;
+  }
+
+  if (myState == 4 && mouseX >= 550 && mouseX <= 740 && mouseY >= 490 && mouseY <= 510) {
+    resetTheGame();
+    myState = 0;
+    timer = 0;
   }
 
   switch (myState) {
