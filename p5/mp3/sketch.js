@@ -30,6 +30,8 @@ function setup() {
 
   sound = loadSound('assets/sound.mp3');
 
+  unloadScrollBars();
+
   //spawn the cars
   for (var i = 0; i < 30; i++) {
     cars.push(new Car());
@@ -258,4 +260,9 @@ function resetTheGame() {
     timer = 0;
   }
 
+}
+
+function unloadScrollBars() {
+    document.documentElement.style.overflow = 'hidden';  // firefox, chrome
+    document.body.scroll = "no"; // ie only
 }
