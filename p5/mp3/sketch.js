@@ -6,8 +6,10 @@ var nancy, nancyRight, nancyLeft;
 var bird;
 var trash;
 var trumps = [];
-var trump ;
+var trump;
 var eat;
+var meeting;
+
 
 function preload() {
   trash = loadImage('assets/trash.png');
@@ -25,6 +27,8 @@ function setup() {
   nancyRight = loadImage('assets/nancy.png');
   nancyLeft = loadImage('assets/nancyLeft.png');
   nancy = nancyRight;
+
+  meeting = loadImage('assets/meeting.jpg');
 
   font = loadFont('assets/font.ttf');
 
@@ -64,12 +68,16 @@ function draw() {
         timer = 0;
       }
       textFont(font);
+      textSize(64);
+      text('Government Throwdown', width/2, height/2-150);
+
+      fill('black');
+      textFont(font);
       textAlign(CENTER);
       textSize(32);
-      text("Click start to play", width / 2, height / 2);
+      text("Click to play", width / 2, height / 2 + 100);
 
       textSize(20);
-      fill('black');
       text("START", width / 2, height / 2 + 200);
 
       break;
@@ -77,10 +85,10 @@ function draw() {
     case 1:
       background(255);
       textFont(font);
-      text('Choose a character!', width/2, height/2-200);
+      text('Choose a character!', width / 2, height / 2 - 200);
       //timer++;
-      image(nancy, width/3, height/2, 200, 200);
-      image(trump, width*0.666, height/2, 200, 200);
+      image(nancy, width / 3, height / 2, 200, 200);
+      image(trump, width * 0.666, height / 2, 200, 200);
       break;
 
     case 2:
@@ -88,23 +96,23 @@ function draw() {
       break;
 
     case 3:
-    background('red');
-    fill('black');
-    textSize(64);
-    text("you lose!", width/2, height/2);
-    textSize(24);
-    fill('white');
-    text("try again", width/2, height/2+200);
+      background('red');
+      fill('black');
+      textSize(64);
+      text("you lose!", width / 2, height / 2);
+      textSize(24);
+      fill('white');
+      text("try again", width / 2, height / 2 + 200);
       break;
 
-      case 4:
+    case 4:
       background('green');
       fill('black');
       textSize(64);
-      text("you win!", width/2, height/2);
+      text("you win!", width / 2, height / 2);
       textSize(24);
       fill('white');
-      text("play again", width/2, height/2+200);
+      text("play again", width / 2, height / 2 + 200);
       break;
   }
 
@@ -114,16 +122,16 @@ function mouseReleased() {
 
   print(mouseX + ',' + mouseY);
 
-  if(myState == 0 && mouseX >= 584 && mouseX <= 680 && mouseY >= 490 && mouseY <= 505){
+  if (myState == 0 && mouseX >= 584 && mouseX <= 680 && mouseY >= 490 && mouseY <= 505) {
     myState = 1;
   }
 
-  if(myState == 1 && mouseX >= 360 && mouseX <= 500 && mouseY >= 225 && mouseY <= 385) {
-    myState =2;
+  if (myState == 1 && mouseX >= 360 && mouseX <= 500 && mouseY >= 225 && mouseY <= 385) {
+    myState = 2;
   }
 
-  if(myState == 1 && mouseX >= 770 && mouseX <= 930 && mouseY >= 225 && mouseY <= 385) {
-    myState =3;
+  if (myState == 1 && mouseX >= 770 && mouseX <= 930 && mouseY >= 225 && mouseY <= 385) {
+    myState = 3;
   }
 
   if (myState == 3 && mouseX >= 550 && mouseX <= 740 && mouseY >= 490 && mouseY <= 510) {
@@ -142,12 +150,16 @@ function mouseReleased() {
 
     case 3:
       timer++;
-      if (timer>300){resetTheGame();}
+      if (timer > 300) {
+        resetTheGame();
+      }
       break;
 
     case 4:
-    timer++;
-    if (timer>300){resetTheGame();}
+      timer++;
+      if (timer > 300) {
+        resetTheGame();
+      }
       break;
   }
 
@@ -222,7 +234,8 @@ function checkForKeys() {
 
 //iterate through the cars array
 function game() {
-  background(100);
+  imageMode(CENTER);
+  image(meeting, width / 2, height / 2, width, height);
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
@@ -246,9 +259,10 @@ function game() {
   //ellipse(frogPos.x, frogPos.y, 60, 60) ;
   image(nancy, frogPos.x, frogPos.y, 60, 60);
   checkForKeys();
-
-  if (timer > 60) {
+  timer++;
+  if (timer > 1300) {
     myState = 3;
+    timer = 0;
   }
 }
 
@@ -263,6 +277,6 @@ function resetTheGame() {
 }
 
 function unloadScrollBars() {
-    document.documentElement.style.overflow = 'hidden';  // firefox, chrome
-    document.body.scroll = "no"; // ie only
+  document.documentElement.style.overflow = 'hidden'; // firefox, chrome
+  document.body.scroll = "no"; // ie only
 }
