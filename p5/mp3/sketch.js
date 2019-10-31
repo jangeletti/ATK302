@@ -75,7 +75,7 @@ function draw() {
       textFont(font);
       textAlign(CENTER);
       textSize(32);
-      text("Click to play", width / 2, height / 2 + 100);
+      text('Click "START" to play', width / 2, height / 2 + 100);
 
       textSize(20);
       text("START", width / 2, height / 2 + 200);
