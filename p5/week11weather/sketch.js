@@ -43,7 +43,10 @@ function draw() {
     text("Temperature = " + Math.round(weather.main.temp), 20, 80);
     text("Wind speed = " + Math.round(weather.wind.speed), 20, 100);
     text("Clouds = " + Math.round(weather.clouds.all), 20, 120);
-    text("Weather = " + weather.weather[0].main, 20, 140);
+    text("Weather = " + weather.weather[i].main, 20, 140);
+    for (){
+      i = 0, weather.weather.length. i++
+    }
     text("Temp Max = " + Math.round(weather.main.temp_max), 20, 160);
     text("Temp Mix = " + Math.round(weather.main.temp_min), 20, 180);
 
