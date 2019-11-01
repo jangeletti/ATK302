@@ -12,7 +12,7 @@ function setup() {
   // HERE Is the call to get the weather. PLEASE PUT YOUR OWN ID IN HERE!!!
   // MINE WILL STOP WORKING IF EVERYONE USES IT!!!
 
-  var myJSONString = 'http://api.openweathermap.org/data/2.5/weather?zip=61701,us&units=imperial&';
+  var myJSONString = 'https://api.openweathermap.org/data/2.5/weather?zip=61701,us&units=imperial&';
   var myIDString = 'appid=9a43da2c9f80b8d6692397cc8982a700'; // Take out the x’s and ADD YOUR ID!!!
   loadJSON(myJSONString + myIDString, gotData); // look - that gotData function happens when JSON comes back.
 
@@ -43,10 +43,7 @@ function draw() {
     text("Temperature = " + Math.round(weather.main.temp), 20, 80);
     text("Wind speed = " + Math.round(weather.wind.speed), 20, 100);
     text("Clouds = " + Math.round(weather.clouds.all), 20, 120);
-    text("Weather = " + weather.weather[i].main, 20, 140);
-    for (){
-      i = 0, weather.weather.length. i++
-    }
+    text("Weather = " + weather.weather[0].main, 20, 140);
     text("Temp Max = " + Math.round(weather.main.temp_max), 20, 160);
     text("Temp Mix = " + Math.round(weather.main.temp_min), 20, 180);
 
