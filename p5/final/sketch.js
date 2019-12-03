@@ -284,7 +284,17 @@ function Question(myNumber, myQuestion, myA, myB, myC, myD, myAnswer) {
     // display the question
     fill('#e1cb28');
     textSize(32);
-    text(this.question, 750, 150);
+    //if the line is too long, then put the first line of text up a line and add a fourth and fifth parameter
+    rectMode(CORNER);
+    if (this.question.length > 24) {
+      textLeading(35);
+      text(this.question, 750, 75, 400, 350);
+    } else {
+      text(this.question, 750, 150);
+    }
+
+    rectMode(CENTER);
+    textLeading();
 
     // display the image
     image(imagesArray[this.number], 450, 280, 400, 400);
