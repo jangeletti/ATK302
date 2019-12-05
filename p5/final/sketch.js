@@ -33,7 +33,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1200, 600);
+  createCanvas(1400, 600);
   unloadScrollBars();
   imageMode(CENTER);
   textAlign(CENTER);
@@ -56,7 +56,7 @@ function gotData(data) {
   console.log(data); // Print the data in the console
 
   // iterate through the array of data and create an object and push it on an array called namesArray
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 1; i < data.length; i++) {
     questionsArray.push(new Question(i, data[i].Question, data[i].A, data[i].B, data[i].C, data[i].D, data[i].Answer));
   }
   for (var i = 0; i < data.length; i++) {
@@ -91,29 +91,29 @@ function draw() {
       image(myLogo, 100, 85.7142857, 152.2, 118.8)
 
       fill('#e1cb28');
-      rect(600, 550, 1200, 100); //yellow bar
+      rect(600, 550, 1400, 100); //yellow bar
       fill('black');
       textFont(corben);
       textSize(60);
       text("Score: " + myScore*100, 50, 585); //Score
       fill('#455160');
-      rect(700, 550, 400, 75); //Scoreboard
       fill('black');
       textSize(100);
       textFont(corben);
-      text('T', 1100, 585); //Progress T
       textSize(12);
-      text(numQuestionsAsked + " / 20", 1050, 585); //Question progress
+      text(numQuestionsAsked + " / 33", 1050, 585); //Question progress
 
       var m = floor(random(questionsArray.length));
+  //    m++ ;
+      console.log("doing question "+ m) ;
       rq = questionsArray[m];
 
       if (rq != null) { // once in a while rq ends up null, not sure why.
         rq.display();
-
+questionsArray.splice(m,1);
         myState = 2;
       } else {
-        console.log("received a null rq");
+        console.log("received a null rq number" + m);
         myState = 1;
       }
       break;
@@ -128,19 +128,14 @@ function draw() {
     textAlign(LEFT);
     image(myLogo, 100, 85.7142857, 152.2, 118.8)
     fill('#e1cb28');
-    rect(600, 550, 1200, 100); //yellow bar
+    rect(600, 550, 1400, 100); //yellow bar
     fill('black');
     textFont(corben);
     textSize(60);
     text('Score:' + myScore*100, 50, 585); //Score
-    fill('#455160');
-    rect(700, 550, 400, 75); //Scoreboard
     fill('black');
-    textSize(100);
-    textFont(corben);
-    text('T', 1100, 585); //Progress T
     textSize(12);
-    text(myScore + "/" + numQuestionsAsked, 1050, 585); //Question progress
+    text(numQuestionsAsked + " / 33", 1050, 585); //Question progress
 
     // display the question
     fill('#e1cb28');
@@ -168,17 +163,12 @@ function draw() {
     break;
 
 
-    case 30:
-      background('#455160');
-      text("welcome to case 30 awesome hip type fun", 100, 100);
-      break;
-
 
     case 100:
       // go to a random state!
 
       // if numQuestionsAsked == 10, go to state 0 or some "win" state?
-      if (numQuestionsAsked == 30) {
+      if (numQuestionsAsked == 33) {
         myState = 101;
       } else {
         // what state to go to?
